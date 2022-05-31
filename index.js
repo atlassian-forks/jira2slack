@@ -57,15 +57,6 @@ function toSlack (jiraMD) {
     // Subscript
     .replace(/~([^~]*)~/g, '_$1')
 
-    // Strikethrough
-    .replace(/((\W)-|(^)-)( *)(\S.*?\S)( *)(-(\W)|-($))/gm, '$2$3$4~$5~$6$8')
-
-    // Code Block
-    .replace(/\{code(:([a-z]+))?\}([^]*)\{code\}/gm, '```$2$3```')
-
-    // Pre-formatted text
-    .replace(/{noformat}/g, '```')
-
     // Un-named Links
     .replace(/\[([^|{}\\^~[\]\s"`]+\.[^|{}\\^~[\]\s"`]+)\]/g, '<$1>')
 
@@ -74,6 +65,15 @@ function toSlack (jiraMD) {
 
     // Smart Links
     .replace(/\[([^[\]|]+?)\|([^[\]|]+?)\|(smart-link)\]/g, '<$1>')
+
+    // Strikethrough
+    .replace(/((\W)-|(^)-)( *)(\S.*?\S)( *)(-(\W)|-($))/gm, '$2$3$4~$5~$6$8')
+
+    // Code Block
+    .replace(/\{code(:([a-z]+))?\}([^]*)\{code\}/gm, '```$2$3```')
+
+    // Pre-formatted text
+    .replace(/{noformat}/g, '```')
 
     // Single Paragraph Blockquote
     .replace(/^bq\.\s+/gm, '> ')
